@@ -1,5 +1,3 @@
-const room = require('util.room');
-
 const roleHarvester = {
 
     /**
@@ -38,8 +36,9 @@ const roleHarvester = {
                     creep.moveTo(targets[targetId], {visualizePathStyle: {stroke: '#22ff00'}});
                 }
             } else {
-                // Everything is full, move to the spawner to not block the resource
-                creep.moveTo(room.find_spawner(creep.room));
+                // Every dropoff is full, move to the spawner to not block the resource
+                const target = creep.pos.findClosestByPath(FIND_MY_SPAWNS);
+                creep.moveTo(target);
             }
         }
     },

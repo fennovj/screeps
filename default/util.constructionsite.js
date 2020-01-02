@@ -9,9 +9,6 @@ const constructionSite = {
      * @return {Boolean} If the construction succeeded or not
      */
     create_close: function(structure, structure_type=STRUCTURE_EXTENSION, nearby=5) {
-        //
-        //
-
         let errCode = -7;
         let timeoutCounter = 0;
 

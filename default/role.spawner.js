@@ -85,8 +85,7 @@ const roleSpawner = {
      */
     total_capacity: function(spawner) {
         const extensions = spawner.room.find(FIND_MY_STRUCTURES).filter((structure) =>
-            structure.structureType == STRUCTURE_EXTENSION &&
-            structure.room == spawner.room).length;
+            structure.structureType == STRUCTURE_EXTENSION).length;
         return ((50 * extensions) + (spawner.store.getCapacity(RESOURCE_ENERGY)));
     },
 
