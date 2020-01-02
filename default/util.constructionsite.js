@@ -1,9 +1,16 @@
 const constructionSite = {
 
+    /**
+     * (attempt to) Create a constructionSite nearby a roomObject
+     * Return true if succesful, false if not
+     * @param {RoomObject} structure The RoomObject to try to build nearby
+     * @param {String} structure_type The type of constructionSite to build
+     * @param {Int} nearby The radius of the square around the object to try to build
+     * @return {Boolean} If the construction succeeded or not
+     */
     create_close: function(structure, structure_type=STRUCTURE_EXTENSION, nearby=5) {
-        // (attempt to) Create a constructionSite nearby another structure
-        // The structure must have `.pos` and `.room` attributes
-        // Return true if succesful, false if not
+        //
+        //
 
         let errCode = -7;
         let timeoutCounter = 0;
@@ -16,7 +23,6 @@ const constructionSite = {
             errCode = structure.room.createConstructionSite(newX, newY, structure_type);
             timeoutCounter += 1;
         }
-
         return errCode == 0;
     },
 
