@@ -18,7 +18,7 @@ const roleHarvester = {
                 creep.moveTo(sources[sourceId], {visualizePathStyle: {stroke: '#22ff00'}});
             }
         } else {
-            const targets = creep.room.find(FIND_STRUCTURES, {
+            const targets = creep.room.find(FIND_MY_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION ||
                             structure.structureType == STRUCTURE_SPAWN) &&
