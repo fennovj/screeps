@@ -39,6 +39,28 @@ const room = {
         return (Game.spawns[name].room);
     },
 
+    /**
+     * Function that 'prepares' a room after taking control of it.
+     * It does the following:
+     * - Delete the CLAIM flag
+     * - Get spawner flags, and make spawns at them
+     * - Delete the spawner flags
+     * @param {Room} room The room that is now under our control
+     * @param {Flag} claimFlag flag to delete, or falsey if not available
+     */
+    prepare_after_control: function(room, claimFlag = 0) {
+        claimFlag.remove();
+
+        spawnerFlags = flag.get_spawns(creep.room);
+        _.each(spawnerFlags, (flag) => {
+            flag.room.createConstructionSite(
+                flag.pos.x, flag.pos.y, STRUCTURE_SPAWN,
+                'Spawn' + (Memory['spawn_counter'] + 1));
+            Memory['spawn_counter'] += 1;
+            flag.remove();
+        });
+    },
+
 };
 
 module.exports = room;

@@ -41,7 +41,7 @@ const roleSpawner = {
      */
     decide_spawn_config: function(spawner) {
         let buildRole = false;
-        const basicShape = [WORK, CARRY, MOVE];
+        let basicShape = [WORK, CARRY, MOVE];
         let shape = [];
 
         workers = room.count_creeps(spawner.room);
@@ -50,6 +50,15 @@ const roleSpawner = {
         if (workers['numUpgraders'] < 10) {
             buildRole = 'upgrader';
             shape = [MOVE, MOVE, CARRY, CARRY, WORK];
+        }
+        if (workers['numClaimers'] < 0) {
+            // TODO add checks
+            // The checks should be: capacity should be at least 800, and
+            // A 'CLAIM' flag should exist. Also GCL should be 2?
+            // Also, we don't want multiple claimers, so maybe check that spawner.name == 'Spawn1'?
+            buildRole = 'claimer';
+            basicShape = [CLAIM, MOVE, WORK, CARRY];
+            shape = [MOVE];
         }
         if (workers['numBuilders'] < 3 && spawner.room.find(FIND_CONSTRUCTION_SITES).length) {
             // Only create builders if there are construction sites in the room

@@ -2,6 +2,7 @@ const roleHarvester = require('role.harvester');
 const roleBuilder = require('role.builder');
 const roleSpawner = require('role.spawner');
 const roleUpgrader = require('role.upgrader');
+const roleClaimer = require('role.claimer');
 const constructionSite = require('util.constructionsite');
 const room = require('util.room');
 
@@ -9,6 +10,7 @@ module.exports.loop = function() {
     // Initialization
     if (!Memory['creep_counter']) {
         Memory['creep_counter'] = 0;
+        Memory['spawn_counter'] = 1;
     }
 
     // Memory cleanup
@@ -29,6 +31,9 @@ module.exports.loop = function() {
         }
         if (creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
+        }
+        if (creep.memory.role == 'claimer') {
+            roleClaimer.run(creep);
         }
     });
 
