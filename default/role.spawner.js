@@ -54,11 +54,11 @@ const roleSpawner = {
         if (workers['numBuilders'] < 3 && spawner.room.find(FIND_CONSTRUCTION_SITES).length) {
             // Only create builders if there are construction sites in the room
             buildRole = 'builder';
-            shape = [WORK, WORK, CARRY, MOVE];
+            shape = [WORK, CARRY, MOVE];
         }
-        if (workers['numHarvesters'] < 2) {
+        if (workers['numHarvesters'] < 5) {
             buildRole = 'harvester';
-            shape = [WORK, WORK, CARRY, MOVE];
+            shape = [WORK, CARRY, MOVE];
         }
         return ([buildRole, basicShape, shape]);
     },

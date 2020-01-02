@@ -39,6 +39,19 @@ const room = {
         return (Game.spawns[name].room);
     },
 
+    /**
+     * Find a spawner in a room
+     * @param {Room} room
+     * @return {Spawner} spawner in that room
+     */
+    find_spawner: function(room) {
+        const spawners = room.find(FIND_MY_STRUCTURES, {
+            filter: (structure) => {
+                return (structure.room == room && structure.structureType == STRUCTURE_SPAWN);
+            }});
+        return spawners[0];
+    },
+
 };
 
 module.exports = room;

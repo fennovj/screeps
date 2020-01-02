@@ -1,3 +1,5 @@
+const room = require('util.room');
+
 const roleHarvester = {
 
     /**
@@ -29,11 +31,15 @@ const roleHarvester = {
                             structure.structureType == STRUCTURE_SPAWN) &&
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 },
-            });
+            }).sort();
             if (targets.length > 0) {
-                if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#22ff00'}});
+                const targetId = creep.memory.id % targets.length;
+                if (creep.transfer(targets[targetId], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(targets[targetId], {visualizePathStyle: {stroke: '#22ff00'}});
                 }
+            } else {
+                // Everything is full, move to the spawner to not block the resource
+                creep.moveTo(room.find_spawner(creep.room));
             }
         }
     },
