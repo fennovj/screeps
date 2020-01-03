@@ -95,7 +95,15 @@ const roleSpawner = {
     total_capacity: function(spawner) {
         const extensions = spawner.room.find(FIND_MY_STRUCTURES).filter((structure) =>
             structure.structureType == STRUCTURE_EXTENSION).length;
-        return ((50 * extensions) + (spawner.store.getCapacity(RESOURCE_ENERGY)));
+        const controllerLevel = spawner.room.controller.level;
+        let extensionCapacity = 50;
+        // Extension capacity is 50, unless controller level is 7 or 8
+        if (controllerLevel == 7) {
+            extensionCapacity = 100;
+        } else if (controllerLevel == 8) {
+            extensionCapacity = 200;
+        }
+        return ((extensionCapacity * extensions) + 300);
     },
 
     /**
